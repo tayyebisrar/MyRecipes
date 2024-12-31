@@ -1,0 +1,69 @@
+Used all Week 9 stuff, python-dotenv library
+
+Figure out how to use the API (the key should be stored now in helpertools at the top) - done
+
+curl -s "https://api.nal.usda.gov/fdc/v1/foods/search?api_key=DEMO_KEY&dataType=Foundation&pageSize=1&pageNumber=1" | jq '.foods[] | {description, nutrients: [.foodNutrients[] | select(.nutrientName == "Protein" or .nutrientName == "Carbohydrate, by difference" or .nutrientName == "Total lipid (fat)")]}'
+curl -s "https://api.nal.usda.gov/fdc/v1/foods/search?api_key=DEMO_KEY&dataType=Foundation&pageSize=1&pageNumber=1" | jq '.foods[] | {fdcId, description, foodCategory, nutrients: [.foodNutrients[] | select(.nutrientName == "Protein" or .nutrientName == "Carbohydrate, by difference" or .nutrientName == "Total lipid (fat)") | .nutrientName, .value, .unitName]}'
+curl -s "https://api.nal.usda.gov/fdc/v1/foods/search?api_key=DEMO_KEY&dataType=Foundation&pageSize=1&pageNumber=1" | jq '.foods[] | {fdcId, description, foodCategory, nutrients: [.foodNutrients[] | select(.nutrientName == "Protein" or .nutrientName == "Carbohydrate, by difference" or .nutrientName == "Total lipid (fat)") | {nutrientName, value, unitName}]}'
+curl -s "https://api.nal.usda.gov/fdc/v1/foods/search?api_key=DEMO_KEY&dataType=Foundation&pageSize=1&pageNumber=1" | jq '.foods[] | {fdcId, description, foodCategory, nutrients: [.foodNutrients[] | select(.nutrientName == "Protein" or .nutrientName == "Carbohydrate, by difference" or .nutrientName == "Total lipid (fat)" or .nutrientName == "Energy (Atwater General Factors)") | {nutrientName, value, unitName}]}'
+
+curl -s "https://api.nal.usda.gov/fdc/v1/foods/search?api_key=DEMO_KEY&dataType=Foundation&pageSize=64&pageNumber=1" | jq '.foods[] | {fdcId, description, foodCategory, nutrients: [.foodNutrients[] | select(.nutrientName == "Protein" or .nutrientName == "Carbohydrate, by difference" or .nutrientName == "Total lipid (fat)" or .nutrientName == "Energy (Atwater General Factors)") | {nutrientName, value, unitName}]}'
+
+curl -X GET "https://api.nal.usda.gov/fdc/v1/foods/2262074?api_key=DEMO_KEY"
+curl "https://api.nal.usda.gov/fdc/v1/foods/search?api_key=DEMO_KEY"
+curl "https://api.nal.usda.gov/fdc/v1/foods?fdcIds=2262074"
+
+curl "https://api.nal.usda.gov/fdc/v1/foods/search?api_key=DEMO_KEY&dataType=Foundation&pageSize=100&pageNumber=2"
+
+748967 - whole white egg
+
+
+TODO LIST:
+
+Begin creating the base layout so you can use extends layout in other templates - done
+
+Create SQL tables - done
+
+get the foundational foods (and maybe SR) - done
+
+store them
+
+create templates for register and login - done
+
+decide what to show on the index - done
+
+- favourite recipes - done
+- random foods - done
+
+create template for index - partially done
+
+finish search template (use AJAX) - done
+write JS code for ajax - done
+link to database - done
+choose whether to use the same search template or searched - same, done
+
+design results section - done
+
+change view and create to dropdowns in the navbar - changed, done
+
+create create recipe - done
+-- right side
+- title at top
+- ingredients ul li
+- instructions text box
+- serving size g
+-- left side
+- autocomplete
+
+check API with single food to see if you can find average single for stuff like egg - done, unreliable
+
+remember servings are used for recipes
+
+finish flask backend for create recipe, figure out how to manage recipe_id - done
+
+figure out the e in the inputs - done
+
+create viewrecipe - done
+create favourites - done
+create index - done
+

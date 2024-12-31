@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Search
+{% endblock %}
+
+{% block main %}
+    <div class="searchpagediv d-flex flex-column flex-sm-row mt-5">
+        <div class="searchform col-12 col-sm-6 card" style="padding:5px; height:75vh;">
+            <h1 class="searchtitle h3 h-sm2 pt-3 pb-0">
+                Search from {{ ingredientcount }} products!
+            </h1>
+            <form action="/search" method="post">
+                <div class="categoryselection m-3">
+                    <button class="btn btn-secondary dropdown-toggle categorydropdownbut" id="category-dropdown-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Category: All
+                    </button>
+                    <ul class="dropdown-menu" id="category-dropdown" style="max-height:30vh; overflow-y:auto;">
+                        <li><a class="dropdown-item" href="#" onclick="selectCategory(`All`)">All</a></li>
+                        {% for category in categories %}
+                            <li><a class="dropdown-item" href="#" onclick="selectCategory(`{{category['category']}}`)">{{ category['category']}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!-- Hidden Input for Selected Category -->
+                <input type="hidden" name="category" id="selected-category" value="All">
+                <div class="d-flex align-items-end" style="margin: 0;">
+                    <div class="foodsearch mx-0" style="width:85%; flex: 1;">
+                        <input required autofocus type="text" id="food-search-input" class="form-control" placeholder="Search for a food..." name="ingredient" autocomplete="off"/>
+                    </div>
+
+                    <button class="btn btn-primary green text-align-center flex-shrink-0 searchsubmit" type="submit" style="width:auto;">Search</button>
+                </div>
+            </form>
+
+            <div class="searchautocompleteform">
+                <div id="autocomplete-results" class="list-group" style="display: none;">
+                    <!--Gets auto-populated with search results-->
+                </div>
+            </div>
+        </div>
+        <div class="searchreturnform col-12 col-sm-6 card" style="padding:5px; height:75vh;">
+            <div class="cardbody searchreturnformcardbody d-flex flex-column">
+                <h1 class="searchtitle h3 h-sm2 pb-3">
+                    Food Item:
+                </h1>
+                <div class="row search-first-row flex-grow-1">
+                    <div class="col-12 search-name-col">
+                        <h2 class="smacroname">{%if foodmacros%}{{foodmacros['name']}}{%endif%}</h2>
+                    </div>
+                </div>
+                <div class="row search-second-row flex-grow-1">
+                    <div class="col-6 search-macro-col">
+                        <h2 class="smacrotitle">Calories (per 100g):</h2>
+                        <div class="center-content-100">
+                            <h2 class="smacronumber">{%if foodmacros%}{{foodmacros['calories']}}kcal{%endif%}</h2>
+                        </div>
+                    </div>
+                    <div class="col-6 search-macro-col">
+                        <h2 class="smacrotitle">Carbs (per 100g):</h2>
+                        <div class="center-content-100">
+                            <h2 class="smacronumber">{%if foodmacros%}{{foodmacros['carbohydrates']}}g{%endif%}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row search-third-row flex-grow-1">
+                    <div class="col-6 search-macro-col">
+                        <h2 class="smacrotitle">Protein (per 100g):</h2>
+                        <div class="center-content-100">
+                            <h2 class="smacronumber">{%if foodmacros%}{{foodmacros['protein']}}g{%endif%}</h2>
+                        </div>
+                    </div>
+                    <div class="col-6 search-macro-col">
+                        <h2 class="smacrotitle">Fats (per 100g):</h2>
+                        <div class="center-content-100">
+                            <h2 class="smacronumber">{%if foodmacros%}{{foodmacros['fats']}}g{%endif%}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

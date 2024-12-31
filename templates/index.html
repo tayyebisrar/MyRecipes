@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block main %}
+    <div class="homepagedivs">
+        <div class="row" style="height:100%; width:100%">
+            <div class="col-12" style="height:10%; display:flex; align-items:flex-end; justify-content:center;">
+                <h1 class="welcomewords"><b>Welcome to MyRecipes!</b></h1>
+            </div>
+            <div class="col-12" style="height:90%;">
+                <div class="row" style="height:100%;">
+                    <div class="col-lg-6 col-12 indextable" style="height:100%;">
+                        <div class="row" style="height:10%">
+                            <h2 class="tableheader">Recents</h2>
+                        </div>
+                        <div class="row" style="height:90%">
+                            <div class="table-responsive" style="height:100%; overflow-y:auto;">
+                                <table class="table table-hover rounded-table">
+                                    <tr>
+                                        {% for header in headerdata %}
+                                            <th scope="col" style="width:{{header[1]}}%; ">{{header[0]}}</th>
+                                        {% endfor %}
+                                    </tr>
+                                    {% for recipe in recentdata %}
+                                        <tr>
+                                            {% for key, value in recipe.items() %}
+                                                <td>{{value}}</td>
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12 indextable" style="height:100%;">
+                        <div class="row" style="height:10%">
+                            <h2 class="tableheader">Favourites ({{favcount}})</h2>
+                        </div>
+                        <div class="row" style="height:90%">
+                            <div class="table-responsive" style="height:100%; overflow-y:auto;">
+                                <table class="table table-hover rounded-table">
+                                    <tr>
+                                        {% for header in headerdata %}
+                                            <th scope="col" style="width:{{header[1]}}%; ">{{header[0]}}</th>
+                                        {% endfor %}
+                                    </tr>
+                                    {% for recipe in favouritedata %}
+                                        <tr>
+                                            {% for key, value in recipe.items() %}
+                                                <td>{{value}}</td>
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

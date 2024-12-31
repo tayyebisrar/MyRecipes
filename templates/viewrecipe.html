@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+
+{% block title %}
+View Recipe
+{% endblock %}
+
+{% block main %}
+    <div class="viewrecipepagediv d-flex flex-column flex-sm-row mt-5">
+        <div class="viewrecipeform col-12 col-sm-6 card" style="padding:5px; height:75vh;">
+            <h1 class="searchtitle h3 h-sm2 pt-3 pb-0">View Recipe - {{ recipe_count }} saved</h1>
+            <div class="d-flex align-items-end" style="margin: 0;">
+                <button class="btn btn-primary green text-align-center flex-shrink-0 searchallrecipesbutton" onclick="viewAllRecipes()" style="width:auto;">See All</button>
+                <div class="recipesearch mx-0" style="width:85%; flex: 1;">
+                    <input required autofocus type="text" id="recipe-search-input" class="form-control" placeholder="Search for a recipe..." name="recipename" autocomplete="off"/>
+                </div>
+                <button class="btn btn-primary green text-align-center flex-shrink-0 searchsubmit" onclick="viewRecipe()" style="width:auto;">Search</button>
+            </div>
+
+            <div class="viewrecipeautocompleteform">
+                <div id="view-autocomplete-results" class="list-group" style="display: none;">
+                    <!--Gets auto-populated with search results-->
+                </div>
+            </div>
+        </div>
+
+        <div class="viewrecipereturnform col-12 col-sm-6 card" style="padding:5px; height:75vh; align-items:center; justify-content:center;">
+            <div class="cardbody viewrecipereturnformbody d-flex flex-column">
+
+                <div class = "createreciperightup card d-flex" style="width:100%; height:40%; max-height:40%;">
+                    <div class="cardbody d-flex flex-column recipeinputs m-2" style="flex:1;">
+                        <div class="d-flex flex-row" style="height:20%;">
+                            <input type="text" disabled class="form-control recipe-name-view" id="recipe-name-view" placeholder="Recipe Name" name="recipename" maxlength="64" autocomplete="off">
+                            <input type="text" disabled class="form-control servings" id="servings" placeholder="Servings" name="servings" maxlength="3" autocomplete="off">
+                        </div>
+                        <textarea type="text" disabled class="form-control recipe-instructions" id="recipe-instructions" placeholder="Recipe Instructions" name="recipeinstructions"></textarea>
+                    </div>
+                </div>
+
+
+
+                <div class="createreciperightdown card d-flex" style="width:100%; height:52%; max-height:52%; padding:4px;">
+                    <div class="cardbody d-flex" style="width:100%; min-height:100%; max-height:100%;">
+                        <div class="createreciperightdownleft card col-sm-6 d-flex disabled" id="ingredients-box">
+                            <h2 class="smacrotitle">Ingredients</h2>
+                            <div class="ingredientssection" style="width:100%; height:100%;">
+                                <div id="c-recipe-ingredient-results" class="list-group">
+                                    <!-- List of ingredients dynamically added with JS -->
+                                </div>
+                                <input type="hidden" id="ingredients-list-json" name="ingredients"/>
+                            </div>
+                        </div>
+                        <div class = "createreciperightdownright card col-sm-6 d-flex disabled" id="macros-box">
+                            <h2 class="smacrotitle">Macros</h2>
+                            <div class="macrossection" style="width:100%; height:100%;">
+                                <div class="macrototal">
+                                    <h2 class="macrototalnumber">Calories: <span id="caloriesvalue">0.00</span>kcal</h2>
+                                </div>
+                                <div class="macrototal">
+                                    <h2 class="macrototalnumber">Carbs: <span id="carbsvalue">0.00</span>g</h2>
+                                </div>
+                                <div class="macrototal">
+                                    <h2 class="macrototalnumber">Protein: <span id="proteinvalue">0.00</span>g</h2>
+                                </div>
+                                <div class="macrototal">
+                                    <h2 class="macrototalnumber">Fats: <span id="fatsvalue">0.00</span>g</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="d-flex servingsadjust">
+                    <div style="width:25%; height:100%;">
+                        <input type="text" disabled class="form-control servings-changer" id="servings-changer" placeholder="Servings" name="servings" maxlength="3" autocomplete="off">
+                    </div>
+                    <div style="width:35%; height:100%;">
+                        <p id='datetimeView'></p>
+                    </div>
+                    <div class="d-flex align-items-center" style="width:35%; height:100%;">
+                        <button type="submit" class="btn btn-warning favouriterecipebutton" id="fav-button" onclick="favouriteRecipe()">☆</button>
+                        <button type="submit" class="btn btn-danger deleterecipebutton" onclick="deleteRecipe()">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
